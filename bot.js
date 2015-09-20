@@ -18,7 +18,7 @@ dictionnary['clear'] = 'clear sky';
 
 
 /*
- * Lis les derniers tweets qui font mention à @SlooTony
+ * Read last twits @SlooTony
  */
 var readMentions = function(id) {
 	T.get('statuses/mentions_timeline', {
@@ -44,16 +44,14 @@ var readMentions = function(id) {
 				} else {
 					T.post('statuses/update', { 
 						in_reply_to_status_id: statusId, 
-						status: '@' + username + ' J\'ai aucune ville, ni geoloc, ni spécifiée dans le tweet, comment je fais yo ?' 
+						status: '@' + username // Message no city nor geoloc specified
 					}, 
 						function(err, data, response) {
 							if(err) return console.log(err);
 						}
 					);
 				}
-			} else {
-				console.log('Message : ' + data[i].text + ' - n\'est pas une demande de service');
-			}
+			} 
 		}
 
 		if(data.length > 0) {
@@ -65,7 +63,7 @@ var readMentions = function(id) {
 }
 
 /*
- * Post un tweet en réponse à une demande de service
+ * Twit the weather
  */
 function answerWeather(data) {
 	var username = data.user.screen_name;
